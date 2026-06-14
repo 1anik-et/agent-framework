@@ -181,16 +181,19 @@ The architecture restarts the loop automatically. The LLM processes this validat
 When an LLM evaluates a task against schemas, it executes multi-dimensional statistical operations. It does not "understand" instructions; it multiplies arrays.
 
 ### 1. Tokenization
-Text strings are split into discrete semantic components called tokens and matched to hardcoded dictionary index integers.
-$\text{"Write"} \rightarrow 412 $$ \text{"file"} \rightarrow 873 $
+Text strings are split into discrete semantic components called tokens and matched to hardcoded dictionary index integers. 
+$\text{"Write"} \rightarrow 412$, $\text{"file"} \rightarrow 873$
 
 ### 2. Dense Embedding Vectorization
 The integer IDs are mapped to high-dimensional floating-point vectors ($D = 4096$). These positions map vector space proximity to conceptual semantic definitions.
-$\vec{v}_{\text{Write}} = [0.12, -0.45, 0.89, \dots] $$ \vec{v}_{\text{write\_workspace\_file}} = [0.11, -0.42, 0.88, \dots] $
+$\vec{v}_{\text{Write}} = [0.12, -0.45, 0.89, \dots]$, $\vec{v}_{\text{write\_workspace\_file}} = [0.11, -0.42, 0.88, \dots]$
 
 ### 3. Self-Attention (The Core Matchmaking Engine)
 The model calculates the relationship context between tokens by deriving the Dot Product calculation of their vectors across Query ($Q$), Key ($K$), and Value ($V$) linear matrices:
-$$\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V$$
+
+$$
+\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
+$$
 
 The mathematical dot product ($\sum a_i b_i$) outputs a scalar weight. Because the conceptual vector for user prompt text segments like *"Write a file"* points in almost the identical spatial geometric trajectory as the structural schema parameter string token *"write_workspace_file"*, the attention calculation yields an extreme correlation density metric ($0.98$).
 
@@ -198,7 +201,12 @@ This matrix serves as a mathematical gravitational pull, locking the model’s f
 
 ### 4. Next-Token Selection Matrix
 At the output boundary layer, the network produces raw numerical logits for every individual token word in its vocabulary list ($V \approx 128,000$). It processes these through a Softmax function to translate the raw scores into absolute probability distribution curves:
-$$\sigma(\mathbf{z})_i = \frac{e^{z_i}}{\sum_{j=1}^{K} e^{z_j}}$$
+
+$$
+\sigma(\mathbf{z})_i = \frac{e^{z_i}}{\sum_{j=1}^{K} e^{z_j}}
+$$
+
+Because the self-attention weights are locked onto the tool specifications, the mathematical probability curve for generating an ordinary English word drops, while the mathematical probability for generating a JSON structural opening token (`"{"`) surges to the top position, forcing the system to output machine-readable data.
 
 Because the self-attention weights are locked onto the tool specifications, the mathematical probability curve for generating an ordinary English word drops, while the mathematical probability for generating a JSON structural opening token (`"{"`) surges to the top position, forcing the system to output machine-readable data.
 
