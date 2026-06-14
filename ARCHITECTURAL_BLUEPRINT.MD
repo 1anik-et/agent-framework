@@ -185,8 +185,10 @@ Text strings are split into discrete semantic components called tokens and match
 $\text{"Write"} \rightarrow 412$, $\text{"file"} \rightarrow 873$
 
 ### 2. Dense Embedding Vectorization
-The integer IDs are mapped to high-dimensional floating-point vectors ($D = 4096$). These positions map vector space proximity to conceptual semantic definitions.
-$\vec{v}_{\text{Write}} = [0.12, -0.45, 0.89, \dots]$, $\vec{v}_{\text{write\_workspace\_file}} = [0.11, -0.42, 0.88, \dots]$
+The integer IDs are mapped to high-dimensional floating-point vectors (`D = 4096`). These positions map vector space proximity to conceptual semantic definitions. 
+
+`Vector(Write) = [0.12, -0.45, 0.89, ...]`
+`Vector(write_workspace_file) = [0.11, -0.42, 0.88, ...]`
 
 ### 3. Self-Attention (The Core Matchmaking Engine)
 The model calculates the relationship context between tokens by deriving the Dot Product calculation of their vectors across Query ($Q$), Key ($K$), and Value ($V$) linear matrices:
