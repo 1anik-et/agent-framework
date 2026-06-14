@@ -1,0 +1,31 @@
+# ==========================================
+# 1. Secrets & Environment Variables (CRITICAL)
+# ==========================================
+# Prevents your GROQ_API_KEY from being uploaded to GitHub
+.env
+
+# ==========================================
+# 2. Agent Workspace
+# ==========================================
+# Ignores all the random code and text files the LLM creates 
+# locally during testing (e.g., test.txt, sample code)
+workspace/
+
+# ==========================================
+# 3. Python Cache & Virtual Environments
+# ==========================================
+# Ignores standard Python compilation and environment files
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+env/
+
+# ==========================================
+# 4. OS & IDE Artifacts
+# ==========================================
+# Ignores system junk and editor settings
+.DS_Store
+.vscode/
+.idea/
